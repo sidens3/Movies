@@ -7,10 +7,16 @@
 
 import Foundation
 
-struct Movie {
-    let title: String
-    let year: String
+struct Movie: Decodable {
+    let Title: String
+    let Year: String
     let imdbID: String
-    let type: String
-    let poster: String
+    let `Type`: String  //Type member must not be named 'Type', since it would conflict with the 'foo.Type' expression
+    let Poster: String
+}
+
+struct MovieSearch: Decodable {
+    let Search: [Movie]
+    let totalResults: String
+    let Response: String
 }

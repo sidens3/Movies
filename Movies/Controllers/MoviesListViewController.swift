@@ -13,6 +13,8 @@ class MoviesListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView: UIStackView!
     
+    private var movieListManager = MovieListManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -27,6 +29,8 @@ private extension MoviesListViewController {
         
         searchBar.placeholder = "Search"
         searchBar.delegate = self
+        
+        movieListManager.delegate = self
     }
 }
 
@@ -54,6 +58,20 @@ extension MoviesListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         print("searchBarSearchButtonClicked with search text \(searchBar.text)")
+        
+        movieListManager.fetchMovies(with: searchBar.text ?? "")
         view.endEditing(true)
+    }
+}
+
+extension MoviesListViewController: MovieListManagerDelegate {
+    func didUpdateMovieList(_ movieListManager: MovieListManager, movieSearch: MovieSearch) {
+        //update tableVIew or search empty view
+        print("delegate didUpdateMovieList")
+    }
+    
+    func didFailWithError(error: Error) {
+        //todo search alert woth error info
+        print("delegate didFailWithError \(error)")
     }
 }
