@@ -60,9 +60,6 @@ struct MovieListManager {
     func parseJSON(_ movieSearchData: Data) -> MovieSearch?{
         let decoder = JSONDecoder()
         do {
-            print("")
-            print(String(decoding: movieSearchData, as: UTF8.self))
-            print("")
             let decodedData = try decoder.decode(MovieSearch.self, from: movieSearchData)
             return decodedData
         } catch {
