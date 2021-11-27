@@ -1,5 +1,5 @@
 //
-//  MovieListManager.swift
+//  NetworkManager.swift
 //  Movies
 //
 //  Created by Михаил Зиновьев on 27.11.2021.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol MovieListManagerDelegate {
-    func didUpdateMovieList(_ movieListManager: MovieListManager, movieSearch: MovieSearch)
+protocol MovieListNetworkManagerDelegate {
+    func didUpdateMovieList(movieSearch: MovieSearch)
     func didFailWithError( error: Error?)
 }
 
-struct MovieListManager {
-    var delegate: MovieListManagerDelegate?
+class NetworkManager {
+    var delegate: MovieListNetworkManagerDelegate?
     
     private let headers = [
         "x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
@@ -50,7 +50,7 @@ struct MovieListManager {
 
             if let safeData = data {
                 if let movieSearch = self.parseJSON(safeData){
-                    self.delegate?.didUpdateMovieList(self, movieSearch: movieSearch)
+                    self.delegate?.didUpdateMovieList(movieSearch: movieSearch)
                 }
             }
         }
