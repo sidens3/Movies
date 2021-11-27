@@ -99,5 +99,6 @@ extension MoviesListViewController: MovieListManagerDelegate {
     func didFailWithError(error: Error) {
         //todo search alert woth error info
         print("delegate didFailWithError \(error)")
+        updateUI(needEmptyVIew: true)
     }
 }

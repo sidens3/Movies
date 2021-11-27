@@ -21,7 +21,7 @@ struct MovieListManager {
     ]
     
     func fetchMovies(with seatchString: String) {
-        let urlString = "https://movie-database-imdb-alternative.p.rapidapi.com/?s=Avatar&r=json&page=1"
+        let urlString = "https://movie-database-imdb-alternative.p.rapidapi.com/?s=\(seatchString)&r=json&page=1"
         print(urlString)
         performRequest(with: urlString)
     }

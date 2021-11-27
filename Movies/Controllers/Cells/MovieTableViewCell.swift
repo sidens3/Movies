@@ -13,6 +13,10 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieYear: UILabel!
     
+    override func prepareForReuse() {
+        movieImage.image = nil
+    }
+    
     func configure(with movie: Movie) {
         movieTitle.text = movie.Title
         movieYear.text = movie.Year
