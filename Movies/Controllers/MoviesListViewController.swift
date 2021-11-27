@@ -13,7 +13,7 @@ class MoviesListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView: UIStackView!
     
-    private var movieListManager = MovieListManager()
+    private var networkManager = NetworkManager()
     private var movieList: [Movie] = []
     
 //MARK: - Life Cicle
@@ -32,7 +32,7 @@ private extension MoviesListViewController {
         searchBar.placeholder = "Search"
         searchBar.delegate = self
         
-        movieListManager.delegate = self
+        networkManager.delegate = self
     }
     
     func updateUI(needEmptyVIew: Bool) {
@@ -77,13 +77,13 @@ extension MoviesListViewController: UITableViewDelegate {
 extension MoviesListViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        movieListManager.fetchMovies(with: searchBar.text ?? "")
+        networkManager.fetchMovies(with: searchBar.text ?? "")
         view.endEditing(true)
     }
 }
 
-extension MoviesListViewController: MovieListManagerDelegate {
-    func didUpdateMovieList(_ movieListManager: MovieListManager, movieSearch: MovieSearch) {
+extension MoviesListViewController: MovieListNetworkManagerDelegate {
+    func didUpdateMovieList(movieSearch: MovieSearch) {
         if movieSearch.totalResults != "0" {
             movieList = movieSearch.Search
             updateUI(needEmptyVIew: false)
