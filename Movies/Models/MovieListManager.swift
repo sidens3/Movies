@@ -20,9 +20,11 @@ struct MovieListManager {
         "x-rapidapi-key": "b47c20d26fmsh9a638b90d3c84fcp1de599jsn6eae9cde9d97"
     ]
     
-    func fetchMovies(with seatchString: String) {
-        let urlString = "https://movie-database-imdb-alternative.p.rapidapi.com/?s=\(seatchString)&r=json&page=1"
+    func fetchMovies(with searchString: String) {
+        let formatedSearchString = searchString.trimmingCharacters(in: .whitespaces).escapeSpace()
+        let urlString = "https://movie-database-imdb-alternative.p.rapidapi.com/?s=\(formatedSearchString)&r=json&page=1"
         print(urlString)
+        
         performRequest(with: urlString)
     }
     
@@ -68,5 +70,11 @@ struct MovieListManager {
             print("parse error detected")
             return nil
         }
+    }
+}
+
+private extension String {
+    func escapeSpace() -> String {
+        self.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
     }
 }
