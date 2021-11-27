@@ -77,9 +77,6 @@ extension MoviesListViewController: UITableViewDelegate {
 extension MoviesListViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        print("searchBarSearchButtonClicked with search text \(String(describing: searchBar.text))")
-        
         movieListManager.fetchMovies(with: searchBar.text ?? "")
         view.endEditing(true)
     }
@@ -87,8 +84,6 @@ extension MoviesListViewController: UISearchBarDelegate {
 
 extension MoviesListViewController: MovieListManagerDelegate {
     func didUpdateMovieList(_ movieListManager: MovieListManager, movieSearch: MovieSearch) {
-        //update tableVIew or search empty view
-        print("delegate didUpdateMovieList")
         if movieSearch.totalResults != "0" {
             movieList = movieSearch.Search
             updateUI(needEmptyVIew: false)
@@ -98,8 +93,6 @@ extension MoviesListViewController: MovieListManagerDelegate {
     }
     
     func didFailWithError(error: Error?) {
-        //todo search alert woth error info
-        print("delegate didFailWithError \(String(describing: error))")
         updateUI(needEmptyVIew: true)
     }
 }
