@@ -55,8 +55,11 @@ extension MoviesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard movieList.indices.contains(indexPath.row) else { return UITableViewCell() }
+        guard let cell = tableView
+                .dequeueReusableCell(
+                    withIdentifier: MovieTableViewCell.identifier,
+                    for: indexPath) as? MovieTableViewCell else { return UITableViewCell() }
         
-        let cell = MovieTableViewCell()
         cell.configure(with: movieList[indexPath.row])
         return cell
     }
