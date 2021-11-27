@@ -26,6 +26,7 @@ private extension MoviesListViewController {
         tableView.register(MovieTableViewCell.nib, forCellReuseIdentifier: MovieTableViewCell.identifier)
         
         searchBar.placeholder = "Search"
+        searchBar.delegate = self
     }
 }
 
@@ -47,3 +48,12 @@ extension MoviesListViewController: UITableViewDelegate {
     }
 }
 
+//MARK: - UISearchBarDelegate
+extension MoviesListViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        print("searchBarSearchButtonClicked with search text \(searchBar.text)")
+        view.endEditing(true)
+    }
+}
