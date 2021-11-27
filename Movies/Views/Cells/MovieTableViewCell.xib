@@ -31,23 +31,25 @@
                                 <rect key="frame" x="150" y="0.0" width="288" height="119"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SQ6-81-ycb">
-                                        <rect key="frame" x="0.0" y="0.0" width="288" height="39"/>
+                                        <rect key="frame" x="16" y="0.0" width="272" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mDX-Ht-rNG">
-                                        <rect key="frame" x="0.0" y="39" width="288" height="20.5"/>
+                                        <rect key="frame" x="16" y="39" width="272" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chV-dT-IV2" userLabel="padding">
-                                        <rect key="frame" x="0.0" y="59.5" width="288" height="59.5"/>
+                                        <rect key="frame" x="16" y="59.5" width="272" height="59.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="SQ6-81-ycb" firstAttribute="leading" secondItem="QyU-E6-DKm" secondAttribute="leading" constant="16" id="4lr-ra-sfp"/>
+                                    <constraint firstItem="mDX-Ht-rNG" firstAttribute="leading" secondItem="QyU-E6-DKm" secondAttribute="leading" constant="16" id="Sar-Od-Hrk"/>
                                     <constraint firstItem="chV-dT-IV2" firstAttribute="height" secondItem="QyU-E6-DKm" secondAttribute="height" multiplier="0.5" id="vA2-ZJ-8PP"/>
                                 </constraints>
                             </stackView>

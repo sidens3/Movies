@@ -16,6 +16,7 @@ class MoviesListViewController: UIViewController {
     private var movieListManager = MovieListManager()
     private var movieList: [Movie] = []
     
+//MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -96,9 +97,9 @@ extension MoviesListViewController: MovieListManagerDelegate {
         }
     }
     
-    func didFailWithError(error: Error) {
+    func didFailWithError(error: Error?) {
         //todo search alert woth error info
-        print("delegate didFailWithError \(error)")
+        print("delegate didFailWithError \(String(describing: error))")
         updateUI(needEmptyVIew: true)
     }
 }

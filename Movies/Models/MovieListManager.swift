@@ -9,7 +9,7 @@ import Foundation
 
 protocol MovieListManagerDelegate {
     func didUpdateMovieList(_ movieListManager: MovieListManager, movieSearch: MovieSearch)
-    func didFailWithError( error: Error)
+    func didFailWithError( error: Error?)
 }
 
 struct MovieListManager {
@@ -28,7 +28,10 @@ struct MovieListManager {
     
     func performRequest(with urlString: String)  {
         
-        guard let url = URL(string: urlString) else { return }
+        guard let url = URL(string: urlString) else {
+            delegate?.didFailWithError(error: nil)
+            return
+        }
 
         let request = NSMutableURLRequest(url: url,
                                           cachePolicy: .useProtocolCachePolicy,
