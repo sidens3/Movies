@@ -9,17 +9,47 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movies List View Controller-->
+        <!--Films-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MoviesListViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="2o8-2A-asz">
+                                <rect key="frame" x="8" y="88" width="398" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="lXG-4u-F5d"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vaA-a4-N2s">
+                                <rect key="frame" x="8" y="140" width="398" height="714"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="jwT-Fm-eSa"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="QNQ-vR-TuA"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vaA-a4-N2s" secondAttribute="trailing" constant="8" id="HDu-Mc-ubH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vaA-a4-N2s" secondAttribute="bottom" constant="8" id="TLS-9l-MHg"/>
+                            <constraint firstItem="2o8-2A-asz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="gf6-gb-mpZ"/>
+                            <constraint firstItem="2o8-2A-asz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-8" id="hhh-GS-vjd"/>
+                            <constraint firstItem="2o8-2A-asz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="jjH-dm-tvy"/>
+                            <constraint firstItem="vaA-a4-N2s" firstAttribute="top" secondItem="2o8-2A-asz" secondAttribute="bottom" constant="8" id="l3C-l9-N78"/>
+                            <constraint firstItem="vaA-a4-N2s" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="udr-63-L2h"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="XRu-2o-PjB"/>
+                    <navigationItem key="navigationItem" title="Films" id="XRu-2o-PjB"/>
+                    <connections>
+                        <outlet property="searchBar" destination="2o8-2A-asz" id="ttH-eJ-rHT"/>
+                        <outlet property="tableView" destination="vaA-a4-N2s" id="fRm-Ky-hqJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -28,6 +58,7 @@
         <!--Navigation Controller-->
         <scene sceneID="d86-1p-ajD">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dg7-u1-rIl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mD3-OY-3oG" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7gd-8U-3Av">
@@ -39,7 +70,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="iNv-5h-sd1"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dg7-u1-rIl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="27.536231884057973" y="73.660714285714278"/>
         </scene>
