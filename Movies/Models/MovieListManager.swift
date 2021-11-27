@@ -28,44 +28,28 @@ struct MovieListManager {
     
     func performRequest(with urlString: String)  {
         
-        if let url = URL(string: urlString) {
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { (data, response, error) in
-                if error != nil {
-                    self.delegate?.didFailWithError(error: error!)
-                    print("request perform error detected")
-                    return
-                }
+        guard let url = URL(string: urlString) else { return }
 
-                if let safeData = data {
-                    if let movieSearch = self.parseJSON(safeData){
-                        self.delegate?.didUpdateMovieList(self, movieSearch: movieSearch)
-                    }
+        let request = NSMutableURLRequest(url: url,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = headers
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+            if error != nil {
+                self.delegate?.didFailWithError(error: error!)
+                print("request perform error detected")
+                return
+            }
+
+            if let safeData = data {
+                if let movieSearch = self.parseJSON(safeData){
+                    self.delegate?.didUpdateMovieList(self, movieSearch: movieSearch)
                 }
             }
-            task.resume()
         }
-        
-//
-//        let request = NSMutableURLRequest(url: NSURL(string: "https://movie-database-imdb-alternative.p.rapidapi.com/?s=Avatar&r=json&page=1")! as URL,
-//                                                cachePolicy: .useProtocolCachePolicy,
-//                                            timeoutInterval: 10.0)
-//        request.httpMethod = "GET"
-//        request.allHTTPHeaderFields = headers
-//
-//        let session = URLSession.shared
-//        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-//            if (error != nil) {
-//                print(error)
-//            } else {
-//                let httpResponse = response as? HTTPURLResponse
-//                print(httpResponse)
-//            }
-//        })
-//
-//        dataTask.resume()
-        
-        
+        task.resume()
     }
     
     func parseJSON(_ movieSearchData: Data) -> MovieSearch?{
