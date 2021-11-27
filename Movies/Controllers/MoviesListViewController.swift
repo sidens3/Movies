@@ -14,6 +14,7 @@ class MoviesListViewController: UIViewController {
     @IBOutlet weak var emptyView: UIStackView!
     
     private var movieListManager = MovieListManager()
+    private var movieList: [Movie] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,13 @@ private extension MoviesListViewController {
         searchBar.delegate = self
         
         movieListManager.delegate = self
+    }
+    
+    func showEmptyView(_ solution: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.isHidden = solution
+            self?.emptyView.isHidden = !solution
+        }
     }
 }
 
@@ -57,7 +65,7 @@ extension MoviesListViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        print("searchBarSearchButtonClicked with search text \(searchBar.text)")
+        print("searchBarSearchButtonClicked with search text \(String(describing: searchBar.text))")
         
         movieListManager.fetchMovies(with: searchBar.text ?? "")
         view.endEditing(true)
@@ -68,6 +76,12 @@ extension MoviesListViewController: MovieListManagerDelegate {
     func didUpdateMovieList(_ movieListManager: MovieListManager, movieSearch: MovieSearch) {
         //update tableVIew or search empty view
         print("delegate didUpdateMovieList")
+        if movieSearch.totalResults != "0" {
+            movieList = movieSearch.Search
+            showEmptyView(false)
+        } else {
+            showEmptyView(true)
+        }
     }
     
     func didFailWithError(error: Error) {
