@@ -1,0 +1,18 @@
+//
+//  UITableViewCell+Extensions.swift
+//  Movies
+//
+//  Created by Михаил Зиновьев on 27.11.2021.
+//
+
+import UIKit
+
+extension UITableViewCell {
+    static var identifier: String {
+        return String(describing: self)
+    }
+    
+    static var nib  : UINib{
+        return UINib(nibName: identifier, bundle: nil)
+    }
+}
