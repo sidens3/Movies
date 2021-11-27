@@ -34,22 +34,31 @@ private extension MoviesListViewController {
         movieListManager.delegate = self
     }
     
-    func showEmptyView(_ solution: Bool) {
+    func updateUI(needEmptyVIew: Bool) {
         DispatchQueue.main.async { [weak self] in
-            self?.tableView.isHidden = solution
-            self?.emptyView.isHidden = !solution
+            self?.showEmptyView(needEmptyVIew)
+            self?.tableView.reloadData()
         }
+    }
+    
+    func showEmptyView(_ solution: Bool) {
+        tableView.isHidden = solution
+        emptyView.isHidden = !solution
     }
 }
 
 //MARK: - UITableViewDataSource
 extension MoviesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        movieList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard movieList.indices.contains(indexPath.row) else { return UITableViewCell() }
+        
+        let cell = MovieTableViewCell()
+        cell.configure(with: movieList[indexPath.row])
+        return cell
     }
 }
 
@@ -78,7 +87,7 @@ extension MoviesListViewController: MovieListManagerDelegate {
         print("delegate didUpdateMovieList")
         if movieSearch.totalResults != "0" {
             movieList = movieSearch.Search
-            showEmptyView(false)
+            updateUI(needEmptyVIew: false)
         } else {
             showEmptyView(true)
         }

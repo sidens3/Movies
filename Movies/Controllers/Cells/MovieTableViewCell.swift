@@ -13,15 +13,17 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieYear: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    func configure(with movie: Movie) {
+        movieTitle.text = movie.Title
+        movieYear.text = movie.Year
+        
+        DispatchQueue.global().async {
+            guard let stringURL = movie.Poster else { return }
+            guard let url = URL(string: stringURL) else { return }
+            guard let imageData = try? Data(contentsOf: url) else { return }
+            DispatchQueue.main.async {
+                self.movieImage.image = UIImage(data: imageData)
+            }
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

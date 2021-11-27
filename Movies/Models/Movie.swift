@@ -12,7 +12,7 @@ struct Movie: Decodable {
     let Year: String
     let imdbID: String
     let `Type`: String  //Type member must not be named 'Type', since it would conflict with the 'foo.Type' expression
-    let Poster: String
+    let Poster: String?
 }
 
 struct MovieSearch: Decodable {
