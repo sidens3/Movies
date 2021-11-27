@@ -11,6 +11,7 @@ class MoviesListViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,8 @@ private extension MoviesListViewController {
     func setupViews() {
         tableView.separatorStyle = .none
         tableView.register(MovieTableViewCell.nib, forCellReuseIdentifier: MovieTableViewCell.identifier)
+        
+        searchBar.placeholder = "Search"
     }
 }
 
