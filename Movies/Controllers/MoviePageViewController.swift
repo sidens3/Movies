@@ -9,29 +9,26 @@ import UIKit
 
 class MoviePageViewController: UIViewController {
     @IBOutlet private weak var posterImageView: UIImageView!
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var movieTitleLabel: UILabel!
+    @IBOutlet private weak var movieDescriptionLabel: UILabel!
     @IBOutlet private weak var imdbRatingLabel: UILabel!
     
     var page: MoviePage?
 
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        setupViews()
-//    }
-    
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setupViews()
     }
     
     private func setupViews() {
-        titleLabel.text = page?.title
-        descriptionLabel.text = page?.plot
         if let safeRating = page?.imdbRating {
             imdbRatingLabel.text = "imdb \(safeRating)"
         } else {
             imdbRatingLabel.isHidden = true
         }
+        
+        movieTitleLabel.text = page?.title
+        movieDescriptionLabel.text = page?.plot
         imdbRatingLabel.text = "imdb \( page?.imdbRating ?? "")"
         
         DispatchQueue.global().async {

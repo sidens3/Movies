@@ -76,7 +76,7 @@
         <!--Movie Page View Controller-->
         <scene sceneID="j1c-hh-e9f">
             <objects>
-                <viewController id="XeT-SA-Mf9" customClass="MoviePageViewController" sceneMemberID="viewController">
+                <viewController id="XeT-SA-Mf9" customClass="MoviePageViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WTs-H8-6xg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,6 +124,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Lxb-3m-DSz"/>
+                    <connections>
+                        <outlet property="imdbRatingLabel" destination="1tw-qm-epw" id="huG-aZ-uAZ"/>
+                        <outlet property="movieDescriptionLabel" destination="fZb-1q-ntn" id="gjY-3Q-H48"/>
+                        <outlet property="movieTitleLabel" destination="vlj-vM-4M1" id="IeC-K9-zYQ"/>
+                        <outlet property="posterImageView" destination="JFC-Fz-nzc" id="2Pu-KM-EqI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4C4-aa-R9y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
