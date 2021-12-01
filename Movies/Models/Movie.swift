@@ -8,11 +8,19 @@
 import Foundation
 
 struct Movie: Decodable {
-    let Title: String
-    let Year: String
+    let title: String
+    let year: String
     let imdbID: String
-    let `Type`: String  //Type member must not be named 'Type', since it would conflict with the 'foo.Type' expression
-    let Poster: String?
+    let type: String  //Type member must not be named 'Type', since it would conflict with the 'foo.Type' expression
+    let poster: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case title = "Title"
+        case year = "Year"
+        case imdbID = "imdbID"
+        case type = "Type"
+        case poster = "Poster"
+    }
 }
 
 struct MovieSearch: Decodable {

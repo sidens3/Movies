@@ -25,11 +25,11 @@ class MovieTableViewCell: UITableViewCell {
     }
     
     func configure(with movie: Movie) {
-        movieTitle.text = movie.Title
-        movieYear.text = movie.Year
+        movieTitle.text = movie.title
+        movieYear.text = movie.year
         
         DispatchQueue.global().async {
-            guard let stringURL = movie.Poster else { return }
+            guard let stringURL = movie.poster else { return }
             guard let url = URL(string: stringURL) else { return }
             guard let imageData = try? Data(contentsOf: url) else { return }
             DispatchQueue.main.async {
