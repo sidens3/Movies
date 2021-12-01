@@ -44,24 +44,21 @@ class NetworkManager {
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
-        let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
-            if error != nil {
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, _, error) in
+            guard let data = data else {
                 completion(.failure(.noData))
-                print("request perform error detected")
                 return
             }
-
-            if let safeData = data {
-                self.parseJSON(safeData, with: completion)
-            }
+            
+            self.parseJSON(data, with: completion)
         }
         task.resume()
     }
     
-    func parseJSON(_ movieSearchData: Data, with completion: @escaping(Result<MovieSearch, NetworkError>) -> Void ) {
+    func parseJSON<T: Decodable>(_ data: Data, with completion: @escaping(Result<T, NetworkError>) -> Void ) {
         let decoder = JSONDecoder()
         do {
-            let decodedData = try decoder.decode(MovieSearch.self, from: movieSearchData)
+            let decodedData = try decoder.decode(T.self, from: data)
             completion(.success(decodedData))
         } catch {
             completion(.failure(.decodingError))
