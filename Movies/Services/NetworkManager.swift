@@ -36,6 +36,13 @@ class NetworkManager {
         
         performManualAlamofireRequest(with: urlString, with: completion)
     }
+    
+    func fetchMoviePage(for id: String, with completion: @escaping(Result<MovieSearch, NetworkError>) -> Void ) {
+        let ID = "tt4154796"
+        let urlString = "https://movie-database-imdb-alternative.p.rapidapi.com/?r=json&i=\(ID)"
+        
+        performAlamofireRequest(with: urlString, with: completion)
+    }
 }
 
 //MARK: - Private Methods

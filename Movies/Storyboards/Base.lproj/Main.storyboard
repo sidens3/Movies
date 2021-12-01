@@ -66,11 +66,28 @@
                         <outlet property="emptyView" destination="SS9-BS-P34" id="NHb-UG-XYP"/>
                         <outlet property="searchBar" destination="2o8-2A-asz" id="ttH-eJ-rHT"/>
                         <outlet property="tableView" destination="vaA-a4-N2s" id="fRm-Ky-hqJ"/>
+                        <segue destination="XeT-SA-Mf9" kind="show" id="vRH-5G-Xk2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="937.68115942028987" y="73.660714285714278"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="j1c-hh-e9f">
+            <objects>
+                <viewController id="XeT-SA-Mf9" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WTs-H8-6xg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="lnZ-En-VrH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Lxb-3m-DSz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4C4-aa-R9y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1872" y="74"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="d86-1p-ajD">
