@@ -29,11 +29,11 @@ class NetworkManager {
         "x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
         "x-rapidapi-key": "b47c20d26fmsh9a638b90d3c84fcp1de599jsn6eae9cde9d97"
     ]
-        
+    
     func fetchMovies(with searchString: String, with completion: @escaping(Result<MovieSearch, NetworkError>) -> Void ) {
         let formatedSearchString = searchString.trimmingCharacters(in: .whitespaces).escapeSpace()
         let urlString = "https://movie-database-imdb-alternative.p.rapidapi.com/?s=\(formatedSearchString)&r=json&page=1"
-
+        
         performManualAlamofireRequest(with: urlString, with: completion)
     }
 }
@@ -46,7 +46,7 @@ private extension NetworkManager {
             .validate()
             .responseJSON { dataResponse in
                 switch dataResponse.result {
-
+                
                 case .success(let movieSearchData):
                     let searchResponse = MovieSearch.getMovieSearch(from: movieSearchData)
                     completion(.success(searchResponse))
@@ -76,10 +76,10 @@ private extension NetworkManager {
     //URLSession request
     func performRequest<T: Decodable>(with urlString: String, with completion: @escaping(Result<T, NetworkError>) -> Void )  {
         
-    guard let url = URL(string: urlString) else {
-        completion(.failure(.invalidURL))
-        return
-    }
+        guard let url = URL(string: urlString) else {
+            completion(.failure(.invalidURL))
+            return
+        }
         let request = NSMutableURLRequest(url: url,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)

@@ -8,14 +8,14 @@
 import UIKit
 
 class MoviesListViewController: UIViewController {
-
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView: UIStackView!
-
+    
     private var movieList: [Movie] = []
     
-//MARK: - Life Cicle
+    //MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
