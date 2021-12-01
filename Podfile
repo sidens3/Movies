@@ -6,5 +6,7 @@ target 'Movies' do
   use_frameworks!
 
   # Pods for Movies
+  pod 'SkeletonView'
+  pod 'Alamofire'
 
 end
