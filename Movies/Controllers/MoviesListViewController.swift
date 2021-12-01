@@ -64,8 +64,9 @@ private extension MoviesListViewController {
     func fetchMoviePage(for id: String) {
         NetworkManager.shared.fetchMoviePage(for: id) { result in
             switch result {
-            case .success( let searchResult):
-                print("fetchMoviePage \(searchResult)")
+            case .success(let page):
+                
+                self.performSegue(withIdentifier: "showMoviePage", sender: page)
                 
             case .failure(let error):
                 self.showAlert(for: error)
@@ -136,5 +137,15 @@ private extension MoviesListViewController {
             alert.addAction(okAction)
             self.present(alert, animated: true)
         }
+    }
+}
+
+//MARK: - Navigation
+extension MoviesListViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "showMoviePage", let page = sender as? MoviePage else { return }
+        
+        let moviePageVC = segue.destination as? MoviePageViewController
+        moviePageVC?.page = page
     }
 }
