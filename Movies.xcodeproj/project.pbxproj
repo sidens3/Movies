@@ -47,11 +47,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A4AAC0F2757A33100C0FCFB /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4AD6963327527C2A00D09EB1 /* Main.storyboard */,
+				4AD6963827527C2B00D09EB1 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		4A4AAC102757A34600C0FCFB /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				4AD6962D27527C2A00D09EB1 /* AppDelegate.swift */,
+				4AD6962F27527C2A00D09EB1 /* SceneDelegate.swift */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		4A4AAC112757A35500C0FCFB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4A70FCCB2752917600424CD7 /* NetworkManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4A4AAC122757A3B400C0FCFB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4AD6963627527C2B00D09EB1 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		4A70FCB327527DE000424CD7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				4A70FCC9275287F100424CD7 /* Movie.swift */,
-				4A70FCCB2752917600424CD7 /* NetworkManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -59,9 +92,7 @@
 		4A70FCB427527DED00424CD7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4A70FCB82752805A00424CD7 /* Cells */,
-				4AD6963327527C2A00D09EB1 /* Main.storyboard */,
-				4AD6963827527C2B00D09EB1 /* LaunchScreen.storyboard */,
+				4A70FCC0275281EF00424CD7 /* MovieTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -69,24 +100,15 @@
 		4A70FCB527527DF300424CD7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4A70FCBD2752809300424CD7 /* Cells */,
 				4A70FCB627527EDE00424CD7 /* MoviesListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		4A70FCB82752805A00424CD7 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				4A70FCC1275281EF00424CD7 /* MovieTableViewCell.xib */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
 		4A70FCBD2752809300424CD7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				4A70FCC0275281EF00424CD7 /* MovieTableViewCell.swift */,
+				4A70FCC1275281EF00424CD7 /* MovieTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -118,13 +140,15 @@
 		4AD6962C27527C2A00D09EB1 /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				4A70FCBD2752809300424CD7 /* Cells */,
+				4A4AAC122757A3B400C0FCFB /* Resources */,
+				4A4AAC112757A35500C0FCFB /* Services */,
+				4A4AAC102757A34600C0FCFB /* SupportingFiles */,
+				4A4AAC0F2757A33100C0FCFB /* Storyboards */,
 				4A70FCB527527DF300424CD7 /* Controllers */,
 				4A70FCB427527DED00424CD7 /* Views */,
 				4A70FCB327527DE000424CD7 /* Models */,
 				4A70FCC4275284E600424CD7 /* Extensions */,
-				4AD6962D27527C2A00D09EB1 /* AppDelegate.swift */,
-				4AD6962F27527C2A00D09EB1 /* SceneDelegate.swift */,
-				4AD6963627527C2B00D09EB1 /* Assets.xcassets */,
 				4AD6963B27527C2B00D09EB1 /* Info.plist */,
 			);
 			path = Movies;
