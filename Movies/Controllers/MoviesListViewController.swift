@@ -12,8 +12,7 @@ class MoviesListViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView: UIStackView!
-    
-    private var networkManager = NetworkManager()
+
     private var movieList: [Movie] = []
     
 //MARK: - Life Cicle
@@ -31,8 +30,6 @@ private extension MoviesListViewController {
         
         searchBar.placeholder = "Search"
         searchBar.delegate = self
-        
-        networkManager.delegate = self
     }
     
     func updateUI(needEmptyVIew: Bool) {
@@ -45,6 +42,22 @@ private extension MoviesListViewController {
     func showEmptyView(_ solution: Bool) {
         tableView.isHidden = solution
         emptyView.isHidden = !solution
+    }
+    
+    func fetchMovies(from url: String) {
+        NetworkManager.shared.fetchMovies(with: url) {  result in
+            switch result {
+            case .success( let searchResult):
+                if searchResult.totalResults != "0" {
+                    self.movieList = searchResult.Search
+                    self.updateUI(needEmptyVIew: false)
+                } else {
+                    self.showEmptyView(true)
+                }
+            case .failure(_):
+                self.updateUI(needEmptyVIew: true)
+            }
+        }
     }
 }
 
@@ -75,24 +88,8 @@ extension MoviesListViewController: UITableViewDelegate {
 
 //MARK: - UISearchBarDelegate
 extension MoviesListViewController: UISearchBarDelegate {
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        networkManager.fetchMovies(with: searchBar.text ?? "")
+        fetchMovies(from: searchBar.text ?? "")
         view.endEditing(true)
-    }
-}
-
-extension MoviesListViewController: MovieListNetworkManagerDelegate {
-    func didUpdateMovieList(movieSearch: MovieSearch) {
-        if movieSearch.totalResults != "0" {
-            movieList = movieSearch.Search
-            updateUI(needEmptyVIew: false)
-        } else {
-            showEmptyView(true)
-        }
-    }
-    
-    func didFailWithError(error: Error?) {
-        updateUI(needEmptyVIew: true)
     }
 }
