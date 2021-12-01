@@ -31,8 +31,11 @@ class NetworkManager {
         
         performRequest(with: urlString, with: completion)
     }
-    
-    func performRequest(with urlString: String, with completion: @escaping(Result<MovieSearch, NetworkError>) -> Void )  {
+}
+
+//MARK: - Private Methods
+private extension NetworkManager {
+    func performRequest<T: Decodable>(with urlString: String, with completion: @escaping(Result<T, NetworkError>) -> Void )  {
         
     guard let url = URL(string: urlString) else {
         completion(.failure(.invalidURL))
@@ -66,7 +69,7 @@ class NetworkManager {
     }
 }
 
-//MARK: - Private Methods
+//MARK: - String
 private extension String {
     func escapeSpace() -> String {
         self.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
