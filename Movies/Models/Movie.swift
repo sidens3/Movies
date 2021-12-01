@@ -21,7 +21,7 @@ struct Movie: Decodable {
         case type = "Type"
         case poster = "Poster"
     }
-
+    
     init(title: String, year: String, imdbID: String, type: String, poster: String?) {
         self.title = title
         self.year = year
@@ -67,7 +67,7 @@ struct MovieSearch: Decodable {
         guard let movieSearchData = value as? [String: Any] else {
             return MovieSearch(search: [], totalResults: "0", response: "0")
         }
-
+        
         return MovieSearch(movieSearch: movieSearchData)
     }
     
