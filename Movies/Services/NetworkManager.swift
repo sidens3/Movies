@@ -41,24 +41,67 @@ class NetworkManager {
     func fetchMovies(with searchString: String, with completion: @escaping(Result<MovieSearch, NetworkError>) -> Void ) {
         let formatedSearchString = searchString.trimmingCharacters(in: .whitespaces).escapeSpace()
         let urlString = "https://movie-database-imdb-alternative.p.rapidapi.com/?s=\(formatedSearchString)&r=json&page=1"
+        print(urlString)
 
-        AF.request(urlString, headers: httpHeaders)
-            .validate()
-            .responseDecodable(of: MovieSearch.self) { dataResponse in
-                switch dataResponse.result {
-
-                case .success(let movieSearch):
-                    completion(.success(movieSearch))
-                case .failure(let error):
-                    print("error: \(error.localizedDescription)")
-                    completion(.failure(.decodingError))
-                }
-            }
+        performManualAlamofireRequest(with: urlString, with: completion)
     }
+        
+//    func fetchMovies(with searchString: String, with completion: @escaping(Result<MovieSearch, NetworkError>) -> Void ) {
+//        let formatedSearchString = searchString.trimmingCharacters(in: .whitespaces).escapeSpace()
+//        let urlString = "https://movie-database-imdb-alternative.p.rapidapi.com/?s=\(formatedSearchString)&r=json&page=1"
+//
+//        AF.request(urlString, headers: httpHeaders)
+//            .validate()
+//            .responseJSON { dataResponse in
+//                switch dataResponse.result {
+//
+//                case .success(let movieSearchData):
+//                    let searchResponse = MovieSearch.getMovieSearch(from: movieSearchData)
+//                    completion(.success(searchResponse))
+//
+//                case .failure:
+//                    completion(.failure(.decodingError))
+//                }
+//            }
+//    }
 }
 
 //MARK: - Private Methods
 private extension NetworkManager {
+    //Alamofire request with manual parse
+    func performManualAlamofireRequest(with urlString: String, with completion: @escaping(Result<MovieSearch, NetworkError>) -> Void )  {
+        AF.request(urlString, headers: httpHeaders)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+
+                case .success(let movieSearchData):
+                    let searchResponse = MovieSearch.getMovieSearch(from: movieSearchData)
+                    completion(.success(searchResponse))
+                    
+                case .failure:
+                    completion(.failure(.decodingError))
+                }
+            }
+    }
+    
+    
+    //Alamofire request with automatic parse
+    func performAlamofireRequest<T: Decodable>(with urlString: String, with completion: @escaping(Result<T, NetworkError>) -> Void )  {
+        AF.request(urlString, headers: httpHeaders)
+            .validate()
+            .responseDecodable(of: T.self) { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    completion(.success(value))
+                case .failure:
+                    completion(.failure(.decodingError))
+                }
+            }
+    }
+    
+    
+    //URLSession request
     func performRequest<T: Decodable>(with urlString: String, with completion: @escaping(Result<T, NetworkError>) -> Void )  {
         
     guard let url = URL(string: urlString) else {

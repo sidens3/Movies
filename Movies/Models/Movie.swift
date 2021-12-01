@@ -11,7 +11,7 @@ struct Movie: Decodable {
     let title: String
     let year: String
     let imdbID: String
-    let type: String  //Type member must not be named 'Type', since it would conflict with the 'foo.Type' expression
+    let type: String
     let poster: String?
     
     enum CodingKeys: String, CodingKey {
@@ -63,20 +63,16 @@ struct MovieSearch: Decodable {
     }
     
     init(movieSearch: [String: Any]) {
-        search = movieSearch["totalResults"] as? [Movie] ?? []
-        
-//        search = Movie.getMovies(from: movieSearch["totalResults"] ?? [])
+        search = Movie.getMovies(from: movieSearch["Search"] ?? [])
         totalResults = movieSearch["totalResults"] as? String ?? ""
         response = movieSearch["Response"] as? String ?? ""
     }
     
-//    static func getMovieSearch(from value: Any) -> MovieSearch {
-//        guard let movieSearchData = value as? [[String: Any]] else {
-//            return MovieSearch(search: [], totalResults: "0", response: "0")
-//        }
-//        
-//        guard let moviesData = value as? [[String: Any]] else { return [] }
-//        
-//        return movieSearchData.compactMap { Movie(movieData: $0) }
-//    }
+    static func getMovieSearch(from value: Any) -> MovieSearch {
+        guard let movieSearchData = value as? [String: Any] else {
+            return MovieSearch(search: [], totalResults: "0", response: "0")
+        }
+
+        return MovieSearch(movieSearch: movieSearchData)
+    }
 }
