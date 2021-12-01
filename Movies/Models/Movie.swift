@@ -37,11 +37,6 @@ struct Movie: Decodable {
         type = movieData["Type"] as? String ?? ""
         poster = movieData["Poster"] as? String ?? ""
     }
-    
-    static func getMovies(from value: Any) -> [Movie] {
-        guard let moviesData = value as? [[String: Any]] else { return [] }
-        return moviesData.compactMap { Movie(movieData: $0) }
-    }
 }
 
 struct MovieSearch: Decodable {
@@ -63,7 +58,7 @@ struct MovieSearch: Decodable {
     }
     
     init(movieSearch: [String: Any]) {
-        search = Movie.getMovies(from: movieSearch["Search"] ?? [])
+        search = MovieSearch.getMovies(from: movieSearch["Search"] ?? [])
         totalResults = movieSearch["totalResults"] as? String ?? ""
         response = movieSearch["Response"] as? String ?? ""
     }
@@ -74,5 +69,10 @@ struct MovieSearch: Decodable {
         }
 
         return MovieSearch(movieSearch: movieSearchData)
+    }
+    
+    static func getMovies(from value: Any) -> [Movie] {
+        guard let moviesData = value as? [[String: Any]] else { return [] }
+        return moviesData.compactMap { Movie(movieData: $0) }
     }
 }

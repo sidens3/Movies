@@ -29,41 +29,13 @@ class NetworkManager {
         "x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
         "x-rapidapi-key": "b47c20d26fmsh9a638b90d3c84fcp1de599jsn6eae9cde9d97"
     ]
-    
-//    func fetchMovies(with searchString: String, with completion: @escaping(Result<MovieSearch, NetworkError>) -> Void ) {
-//        let formatedSearchString = searchString.trimmingCharacters(in: .whitespaces).escapeSpace()
-//        let urlString = "https://movie-database-imdb-alternative.p.rapidapi.com/?s=\(formatedSearchString)&r=json&page=1"
-//        print(urlString)
-//
-//        performRequest(with: urlString, with: completion)
-//    }
-    
+        
     func fetchMovies(with searchString: String, with completion: @escaping(Result<MovieSearch, NetworkError>) -> Void ) {
         let formatedSearchString = searchString.trimmingCharacters(in: .whitespaces).escapeSpace()
         let urlString = "https://movie-database-imdb-alternative.p.rapidapi.com/?s=\(formatedSearchString)&r=json&page=1"
-        print(urlString)
 
         performManualAlamofireRequest(with: urlString, with: completion)
     }
-        
-//    func fetchMovies(with searchString: String, with completion: @escaping(Result<MovieSearch, NetworkError>) -> Void ) {
-//        let formatedSearchString = searchString.trimmingCharacters(in: .whitespaces).escapeSpace()
-//        let urlString = "https://movie-database-imdb-alternative.p.rapidapi.com/?s=\(formatedSearchString)&r=json&page=1"
-//
-//        AF.request(urlString, headers: httpHeaders)
-//            .validate()
-//            .responseJSON { dataResponse in
-//                switch dataResponse.result {
-//
-//                case .success(let movieSearchData):
-//                    let searchResponse = MovieSearch.getMovieSearch(from: movieSearchData)
-//                    completion(.success(searchResponse))
-//
-//                case .failure:
-//                    completion(.failure(.decodingError))
-//                }
-//            }
-//    }
 }
 
 //MARK: - Private Methods
