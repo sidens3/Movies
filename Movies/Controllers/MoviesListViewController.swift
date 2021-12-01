@@ -49,7 +49,7 @@ private extension MoviesListViewController {
             switch result {
             case .success( let searchResult):
                 if searchResult.totalResults != "0" {
-                    self.movieList = searchResult.Search
+                    self.movieList = searchResult.search
                     self.updateUI(needEmptyVIew: false)
                 } else {
                     self.showEmptyView(true)

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum NetworkError: Error {
     case invalidURL
@@ -24,12 +25,35 @@ class NetworkManager {
         "x-rapidapi-key": "b47c20d26fmsh9a638b90d3c84fcp1de599jsn6eae9cde9d97"
     ]
     
+    private let httpHeaders: HTTPHeaders = [
+        "x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
+        "x-rapidapi-key": "b47c20d26fmsh9a638b90d3c84fcp1de599jsn6eae9cde9d97"
+    ]
+    
+//    func fetchMovies(with searchString: String, with completion: @escaping(Result<MovieSearch, NetworkError>) -> Void ) {
+//        let formatedSearchString = searchString.trimmingCharacters(in: .whitespaces).escapeSpace()
+//        let urlString = "https://movie-database-imdb-alternative.p.rapidapi.com/?s=\(formatedSearchString)&r=json&page=1"
+//        print(urlString)
+//
+//        performRequest(with: urlString, with: completion)
+//    }
+    
     func fetchMovies(with searchString: String, with completion: @escaping(Result<MovieSearch, NetworkError>) -> Void ) {
         let formatedSearchString = searchString.trimmingCharacters(in: .whitespaces).escapeSpace()
         let urlString = "https://movie-database-imdb-alternative.p.rapidapi.com/?s=\(formatedSearchString)&r=json&page=1"
-        print(urlString)
-        
-        performRequest(with: urlString, with: completion)
+
+        AF.request(urlString, headers: httpHeaders)
+            .validate()
+            .responseDecodable(of: MovieSearch.self) { dataResponse in
+                switch dataResponse.result {
+
+                case .success(let movieSearch):
+                    completion(.success(movieSearch))
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                    completion(.failure(.decodingError))
+                }
+            }
     }
 }
 
